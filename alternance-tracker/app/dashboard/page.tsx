@@ -4,7 +4,8 @@ import { candidatures } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createCandidature } from "./actions";
+import { createCandidature, deleteCandidature } from "./actions";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   await auth.protect();
@@ -37,8 +38,17 @@ export default async function DashboardPage() {
 
       <ul>
         {résultats.map((c) => (
-          <li key={c.id}>
-            {c.entreprise} — {c.poste} — {c.statut}
+          <li key={c.id} className="flex items-center gap-3">
+            <span>{c.entreprise} — {c.poste} — {c.statut}</span>
+            <Link href={`/dashboard/${c.id}/edit`}>
+              <Button variant="outline" size="sm">Modifier</Button>
+            </Link>
+            <form action={deleteCandidature}>
+              <input type="hidden" name="id" value={c.id} />
+              <Button variant="destructive" size="sm" type="submit">
+                Supprimer
+              </Button>
+            </form>
           </li>
         ))}
       </ul>
