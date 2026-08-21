@@ -34,8 +34,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <body className="min-h-full flex flex-col">
           <header className="flex justify-end gap-4 p-4">
             <Show when="signed-out">
-              <SignInButton />
-              <SignUpButton />
+              <SignInButton mode="redirect" />
+              <SignUpButton mode="redirect" />
             </Show>
             <Show when="signed-in">
               <UserButton />
