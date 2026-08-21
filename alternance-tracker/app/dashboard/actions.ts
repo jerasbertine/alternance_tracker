@@ -2,9 +2,11 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/db";
 import { candidatures } from "@/db/schema";
+import { and, eq} from "drizzle-orm";
 
 const candidatureSchema = z.object({
     entreprise: z.string().min(1, "L'entreprise est requise"),
@@ -28,4 +30,37 @@ export async function createCandidature(formData: FormData) {
     });
 
     revalidatePath("/dashboard");
+}
+
+export async function deleteCandidature(formData: FormData) {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Non connecté");
+
+    const id = formData.get("id") as string;
+
+    await db
+        .delete(candidatures)
+        .where(and(eq(candidatures.id, id), eq(candidatures.userId, userId)));
+
+    revalidatePath("/dashboard");
+}
+
+export async function updateCandidature(formData: FormData) {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Non connecté");
+
+    const id = formData.get("id") as string;
+    const données = candidatureSchema.parse({
+        entreprise: formData.get("entreprise"),
+        poste: formData.get("poste"),
+        statut: formData.get("statut"),
+    });
+
+    await db
+        .update(candidatures)
+        .set(données)
+        .where(and(eq(candidatures.id, id), eq(candidatures.userId, userId)));
+
+    revalidatePath("/dashboard");
+    redirect("/dashboard");
 }
