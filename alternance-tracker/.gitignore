@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# markdown notes (keep README.md tracked, ignore everything else)
+*.md
+!README.md
