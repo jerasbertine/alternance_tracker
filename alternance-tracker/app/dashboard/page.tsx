@@ -5,15 +5,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createCandidature, deleteCandidature } from "./actions";
+import { eq, asc, desc } from "drizzle-orm";
+
 import Link from "next/link";
 
-export default async function DashboardPage() {
+export default async function DashboardPage(
+  props: PageProps<"/dashboard">
+) {
   await auth.protect();
 
-  const résultats = await db.select().from(candidatures);
+  const { statut, tri } = await props.searchParams;
+
+  const résultats = await db
+    .select()
+    .from(candidatures)
+    .where(typeof statut === "string" ? eq(candidatures.statut, statut as (typeof candidatures.statut.enumValues)[number]) : undefined)
+    .orderBy(tri === "asc" ? asc(candidatures.createdAt) : desc(candidatures.createdAt));
 
   return (
     <>
+      <div className="flex gap-2 mb-4">
+        <Link href="/dashboard"><Button variant="outline" size="sm">Tous</Button></Link>
+        <Link href="/dashboard?statut=a_postuler"><Button variant="outline" size="sm">À postuler</Button></Link>
+        <Link href="/dashboard?statut=envoyee"><Button variant="outline" size="sm">Envoyée</Button></Link>
+        <Link href="/dashboard?statut=entretien"><Button variant="outline" size="sm">Entretien</Button></Link>
+        <Link href="/dashboard?statut=refusee"><Button variant="outline" size="sm">Refusée</Button></Link>
+        <Link href="/dashboard?statut=acceptee"><Button variant="outline" size="sm">Acceptée</Button></Link>
+      </div>
+      <div className="flex gap-2 mb-8">
+        <Link href={`/dashboard${statut ? `?statut=${statut}&` : "?"}tri=desc`}><Button variant="ghost" size="sm">Plus récent</Button></Link>
+        <Link href={`/dashboard${statut ? `?statut=${statut}&` : "?"}tri=asc`}><Button variant="ghost" size="sm">Plus ancien</Button></Link>
+      </div>
+        
       <form action={createCandidature} className="flex flex-col gap-3 max-w-sm mb-8">
         <div>
           <Label htmlFor="entreprise">Entreprise</Label>
