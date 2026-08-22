@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createCandidature, deleteCandidature } from "./actions";
 import { eq, asc, desc } from "drizzle-orm";
+import { STATUTS } from "@/lib/statuts";
 
 import Link from "next/link";
 
@@ -26,11 +27,11 @@ export default async function DashboardPage(
     <>
       <div className="flex gap-2 mb-4">
         <Link href="/dashboard"><Button variant="outline" size="sm">Tous</Button></Link>
-        <Link href="/dashboard?statut=a_postuler"><Button variant="outline" size="sm">À postuler</Button></Link>
-        <Link href="/dashboard?statut=envoyee"><Button variant="outline" size="sm">Envoyée</Button></Link>
-        <Link href="/dashboard?statut=entretien"><Button variant="outline" size="sm">Entretien</Button></Link>
-        <Link href="/dashboard?statut=refusee"><Button variant="outline" size="sm">Refusée</Button></Link>
-        <Link href="/dashboard?statut=acceptee"><Button variant="outline" size="sm">Acceptée</Button></Link>
+        {STATUTS.map((s) => (
+          <Link key={s.value} href={`/dashboard?statut=${s.value}`}>
+            <Button variant="outline" size="sm">{s.label}</Button>
+          </Link>
+        ))}
       </div>
       <div className="flex gap-2 mb-8">
         <Link href={`/dashboard${statut ? `?statut=${statut}&` : "?"}tri=desc`}><Button variant="ghost" size="sm">Plus récent</Button></Link>
@@ -49,11 +50,9 @@ export default async function DashboardPage(
         <div>
           <Label htmlFor="statut">Statut</Label>
           <select id="statut" name="statut" className="w-full border rounded-md h-9 px-3">
-            <option value="a_postuler">À postuler</option>
-            <option value="envoyee">Envoyée</option>
-            <option value="entretien">Entretien</option>
-            <option value="refusee">Refusée</option>
-            <option value="acceptee">Acceptée</option>
+            {STATUTS.map((s) => (
+              <option key={s.value} value={s.value}>{s.label}</option>
+            ))}
           </select>
         </div>
         <Button type="submit">Ajouter</Button>

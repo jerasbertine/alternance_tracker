@@ -3,6 +3,7 @@ import { pgTable, text, timestamp, uuid, pgEnum } from "drizzle-orm/pg-core";
 export const statutEnum = pgEnum("statut", [
     "a_postuler",
     "envoyee",
+    "relance",
     "entretien",
     "refusee",
     "acceptee",
@@ -15,6 +16,7 @@ export const candidatures = pgTable("candidatures", {
   poste: text("poste").notNull(),
   statut: statutEnum("statut").notNull().default("a_postuler"),
   dateCandidature: timestamp("date_candidature", { mode: "date" }),
+  dateDerniereRelance: timestamp("date_derniere_relance", { mode: "date" }),
   lienOffre: text("lien_offre"),
   notes: text("notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),

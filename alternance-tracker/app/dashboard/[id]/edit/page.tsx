@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { updateCandidature } from "@/app/dashboard/actions";
+import { STATUTS } from "@/lib/statuts";
 
 export default async function EditCandidaturePage(
   props: PageProps<"/dashboard/[id]/edit">
@@ -38,11 +39,9 @@ export default async function EditCandidaturePage(
       <div>
         <Label htmlFor="statut">Statut</Label>
         <select id="statut" name="statut" defaultValue={candidature.statut} className="w-full border rounded-md h-9 px-3">
-          <option value="a_postuler">À postuler</option>
-          <option value="envoyee">Envoyée</option>
-          <option value="entretien">Entretien</option>
-          <option value="refusee">Refusée</option>
-          <option value="acceptee">Acceptée</option>
+          {STATUTS.map((s) => (
+            <option key={s.value} value={s.value}>{s.label}</option>
+          ))}
         </select>
       </div>
       <Button type="submit">Enregistrer</Button>
