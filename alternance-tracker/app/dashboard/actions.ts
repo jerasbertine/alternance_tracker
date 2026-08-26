@@ -5,13 +5,13 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/db";
-import { candidatures } from "@/db/schema";
+import { candidatures, statutEnum } from "@/db/schema";
 import { and, eq} from "drizzle-orm";
 
 const candidatureSchema = z.object({
     entreprise: z.string().min(1, "L'entreprise est requise"),
     poste: z.string().min(1, "Le poste est requis"),
-    statut: z.enum(["a_postuler", "envoyee", "entretien", "refusee", "acceptee"]),
+    statut: z.enum(statutEnum.enumValues),
 })
 
 export async function createCandidature(formData: FormData) {

@@ -1,69 +1,97 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { TypewriterEntreprise } from "@/components/typewriter-entreprise";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="min-h-full flex flex-col bg-background text-foreground">
+      <nav className="flex items-center justify-between px-8 py-5">
+        <span className="font-serif italic font-semibold text-2xl">
+          alternance<span className="text-accent">tracker</span>
+        </span>
+        <div className="flex items-center gap-3">
+          <Link href="/sign-in">
+            <Button variant="outline" size="lg">Connexion</Button>
+          </Link>
+          <Link href="/sign-up">
+            <Button size="lg">S'inscrire</Button>
+          </Link>
+        </div>
+      </nav>
+
+      <section className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 items-center px-8 py-20 max-w-6xl mx-auto">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-wider text-accent mb-4">
+            Suivi de candidatures
+          </p>
+          <h1 className="font-serif italic text-4xl md:text-5xl font-semibold leading-tight mb-6">
+            Chaque candidature mérite un dossier.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-muted-foreground text-lg mb-8 max-w-md">
+            Centralise tes candidatures d'alternance, relance au bon moment et
+            garde une vue claire sur ton pipeline de l'envoi jusqu'à la
+            signature.
+          </p>
+          <div className="flex gap-3">
+            <Link href="/sign-up">
+              <Button>Créer mon premier dossier</Button>
+            </Link>
+            <Link href="/sign-in">
+              <Button variant="outline">Connexion</Button>
+            </Link>
+          </div>
+        </div>
+        <div className="bg-secondary border border-border rounded p-6" style={{ boxShadow: "6px 6px 0 var(--border)" }}>
+          <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
+            Dossier N° 2026-0042
+          </p>
+          <p className="font-serif italic text-xl font-medium mb-1"><TypewriterEntreprise /></p>
+          <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-status-amber bg-status-amber-bg border border-status-amber rounded px-2 py-0.5 mb-4">
+            Relance
+          </span>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <p>Poste : Développeur fullstack</p>
+            <p>Envoyé le : 04.08.2026</p>
+            <p>Dernière relance : 15.08.2026</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid md:grid-cols-3 px-8 py-20 max-w-6xl mx-auto">
+        <div className="border border-border p-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">01</p>
+          <h3 className="font-serif italic text-xl font-medium mb-2">Pipeline</h3>
+          <p className="text-muted-foreground text-sm">
+            Garde une vision claire sur toutes tes candidatures, de l'envoi jusqu'a la signature.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="border border-border p-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">02</p>
+          <h3 className="font-serif italic text-xl font-medium mb-2">Relance</h3>
+          <p className="text-muted-foreground text-sm">
+            Ne rate plus une relance: les cnaidatures sans réponse depuis un moment ressortent clairement.
+          </p>
         </div>
-      </main>
+        <div className="border border-border p-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">03</p>
+          <h3 className="font-serif italic text-xl font-medium mb-2">Simplicité</h3>
+          <p className="text-muted-foreground text-sm">
+            Un seul endroit pour centralier toute tes candidatures d'alternance.
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-primary text-primary-foreground text-center px-8 py-20">
+        <h2 className="font-serif italic text-3xl font-medium mb-6 max-w-lg mx-auto">
+          Ton prochain contrat commence par un dossier bien tenu.
+        </h2>
+        <Link href="/sign-up">
+          <Button variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            Ouvrir un dossier
+          </Button>
+        </Link>
+
+      </section>
     </div>
   );
 }
