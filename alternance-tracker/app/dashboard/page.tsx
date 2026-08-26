@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createCandidature, deleteCandidature } from "./actions";
-import { eq, asc, desc } from "drizzle-orm";
+import { and, eq, asc, desc } from "drizzle-orm";
 import { STATUTS } from "@/lib/statuts";
 
 import Link from "next/link";
@@ -13,14 +13,21 @@ import Link from "next/link";
 export default async function DashboardPage(
   props: PageProps<"/dashboard">
 ) {
-  await auth.protect();
+  const { userId } = await auth.protect();
 
   const { statut, tri } = await props.searchParams;
 
   const résultats = await db
     .select()
     .from(candidatures)
-    .where(typeof statut === "string" ? eq(candidatures.statut, statut as (typeof candidatures.statut.enumValues)[number]) : undefined)
+    .where(
+      and(
+        eq(candidatures.userId, userId),
+        typeof statut === "string"
+          ? eq(candidatures.statut, statut as (typeof candidatures.statut.enumValues)[number])
+          : undefined
+      )
+    )
     .orderBy(tri === "asc" ? asc(candidatures.createdAt) : desc(candidatures.createdAt));
 
   return (
