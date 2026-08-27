@@ -11,7 +11,7 @@ export default async function Home() {
   }
   return (
     <div className="min-h-full flex flex-col bg-background text-foreground">
-      <nav className="flex items-center justify-between px-8 py-5">
+      <nav className="flex items-center justify-between px-4 md:px-8 py-5">
         <span className="font-serif italic font-semibold text-2xl">
           alternance<span className="text-accent">tracker</span>
         </span>
@@ -25,7 +25,7 @@ export default async function Home() {
         </div>
       </nav>
 
-      <section className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 items-center px-8 py-20 max-w-6xl mx-auto">
+      <section className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 items-center px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
         <div>
           <p className="font-mono text-xs uppercase tracking-wider text-accent mb-4">
             Suivi de candidatures
@@ -63,7 +63,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="grid md:grid-cols-3 px-8 py-20 max-w-6xl mx-auto">
+      <section className="grid md:grid-cols-3 gap-6 md:gap-0 px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
         <div className="border border-border p-6">
           <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">01</p>
           <h3 className="font-serif italic text-xl font-medium mb-2">Pipeline</h3>
@@ -87,7 +87,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="bg-primary text-primary-foreground text-center px-8 py-20">
+      <section className="bg-primary text-primary-foreground text-center px-4 md:px-8 py-12 md:py-20">
         <h2 className="font-serif italic text-3xl font-medium mb-6 max-w-lg mx-auto">
           Ton prochain contrat commence par un dossier bien tenu.
         </h2>

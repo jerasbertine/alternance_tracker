@@ -28,9 +28,9 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
   const tauxReponse = envoyees > 0 ? Math.round((reponses / envoyees) * 100) : 0;
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 min-w-0">
       <DashboardSidebar />
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 min-w-0 p-4 pt-16 md:p-8 overflow-auto">
         <h1 className="font-serif italic text-2xl font-medium mb-1">Tableau de bord</h1>
         <p className="text-muted-foreground text-sm mb-8">
           {dossiersOuverts} dossier{dossiersOuverts !== 1 ? "s" : ""} actif{dossiersOuverts !== 1 ? "s" : ""} · {relancesDues} relance{relancesDues !== 1 ? "s" : ""} en attente
@@ -61,19 +61,19 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
         </div>
 
         <form action={createCandidature} className="flex flex-wrap items-end gap-4 mb-10 border border-border rounded p-5">
-          <div>
+          <div className="w-full sm:w-auto">
             <Label htmlFor="entreprise">Entreprise</Label>
             <Input id="entreprise" name="entreprise" required></Input>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Label htmlFor="poste">Poste</Label>
             <Input id="poste" name="poste" required></Input>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Label htmlFor="lienOffre">Lien de l'offre (optionnel)</Label>
             <Input id="lienOffre" name="lienOffre" type="url" placeholder="https://..." />
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Label htmlFor="statut">Statut</Label>
             <select id="statut" name="statut" className="w-full border rounded-lg h-8 px-2.5 border-input bg-transparent text-base md:text-sm">
               {STATUTS.map((s) => (
@@ -91,7 +91,7 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
             </p>
           </div>
         ) : (
-        <div className="grid md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {STATUTS.map((colonne) => {
             const items = toutes.filter((c) => c.statut === colonne.value);
             return (
