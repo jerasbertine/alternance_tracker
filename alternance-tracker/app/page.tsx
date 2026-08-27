@@ -1,8 +1,14 @@
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { TypewriterEntreprise } from "@/components/typewriter-entreprise";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  if (userId) {
+    redirect("/dashboard");
+  }
   return (
     <div className="min-h-full flex flex-col bg-background text-foreground">
       <nav className="flex items-center justify-between px-8 py-5">
