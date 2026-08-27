@@ -12,8 +12,8 @@ const candidatureSchema = z.object({
     entreprise: z.string().min(1, "L'entreprise est requise"),
     poste: z.string().min(1, "Le poste est requis"),
     statut: z.enum(statutEnum.enumValues),
-    lienOffre: z.string().optional(),
-    notes: z.string().optional(),
+    lienOffre: z.string().nullable().optional(),
+    notes: z.string().nullable().optional(),
 })
 
 export async function createCandidature(formData: FormData) {
