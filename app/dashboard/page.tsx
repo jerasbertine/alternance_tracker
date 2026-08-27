@@ -63,11 +63,11 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
         <form action={createCandidature} className="flex flex-wrap items-end gap-4 mb-10 border border-border rounded p-5">
           <div>
             <Label htmlFor="entreprise">Entreprise</Label>
-            <Input id="entreprise" name="entreprise"></Input>
+            <Input id="entreprise" name="entreprise" required></Input>
           </div>
           <div>
             <Label htmlFor="poste">Poste</Label>
-            <Input id="poste" name="poste"></Input>
+            <Input id="poste" name="poste" required></Input>
           </div>
           <div>
             <Label htmlFor="lienOffre">Lien de l'offre (optionnel)</Label>
@@ -83,6 +83,14 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
           </div>
           <Button type="submit">+ Nouveau dossier</Button>
         </form>
+        {toutes.length === 0 ? (
+          <div className="border border-dashed border-border rounded p-10 text-center">
+            <p className="font-serif italic text-lg font-medium mb-1">Aucun dossier pour l&apos;instant</p>
+            <p className="text-sm text-muted-foreground">
+              Ajoute ta première candidature avec le formulaire ci-dessus.
+            </p>
+          </div>
+        ) : (
         <div className="grid md:grid-cols-5 gap-4">
           {STATUTS.map((colonne) => {
             const items = toutes.filter((c) => c.statut === colonne.value);
@@ -115,6 +123,7 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
             );
           })}
         </div>
+        )}
       </main>
     </div>
   );

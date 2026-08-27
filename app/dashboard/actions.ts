@@ -20,13 +20,18 @@ export async function createCandidature(formData: FormData) {
     const { userId } = await auth();
     if (!userId) throw new Error("Non connecté");
 
-    const données = candidatureSchema.parse({
+    const res = candidatureSchema.safeParse({
         entreprise: formData.get("entreprise"),
         poste: formData.get("poste"),
         statut: formData.get("statut"),
         lienOffre: formData.get("lienOffre"),
         notes: formData.get("notes"),
     });
+
+    if (!res.success) {
+        return;
+    }
+    const données = res.data
 
     await db.insert(candidatures).values({
         userId,
@@ -56,13 +61,18 @@ export async function updateCandidature(formData: FormData) {
     if (!userId) throw new Error("Non connecté");
 
     const id = formData.get("id") as string;
-    const données = candidatureSchema.parse({
+    const res = candidatureSchema.safeParse({
         entreprise: formData.get("entreprise"),
         poste: formData.get("poste"),
         statut: formData.get("statut"),
         lienOffre: formData.get("lienOffre"),
         notes: formData.get("notes"),
     });
+
+    if (!res.success) {
+        return;
+    }
+    const données = res.data
 
     await db
         .update(candidatures)
