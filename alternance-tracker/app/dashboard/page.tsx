@@ -95,7 +95,9 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
                   {items.length === 0 && (<p className="text-xs text-muted-foreground italic">Vide</p>)}
                   {items.map((c) => (
                     <div key={c.id} className="bg-background border border-border rounded p-3">
-                      <p className="font-serif italic font-medium text-sm">{c.entreprise}</p>
+                      <Link href={`/dashboard/${c.id}`}>
+                        <p className="font-serif italic font-medium text-sm hover:underline">{c.entreprise}</p>
+                      </Link>
                       <p className="text-xs text-muted-foreground mb-2">{c.poste}</p>
                       <div className="flex gap-2">
                         <Link href={`/dashboard/${c.id}/edit`}>
