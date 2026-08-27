@@ -3,7 +3,7 @@ import Link from "next/link"
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex-1 grid md:grid-cols-2">
-      <div className="flex flex-col justify-between p-10 bg-background">
+      <div className="flex flex-col justify-between p-6 md:p-10 bg-background">
         <Link href="/" className="font-serif italic font-semibold text-xl">
           alternance<span className="text-accent">tracker</span>
         </Link>
@@ -22,7 +22,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           Session sécurisée
         </p>
       </div>
-      <div className="flex items-center justify-center bg-secondary p-10">
+      <div className="flex items-center justify-center bg-secondary p-6 md:p-10">
         {children}
       </div>
     </div>
