@@ -12,6 +12,7 @@ const candidatureSchema = z.object({
     entreprise: z.string().min(1, "L'entreprise est requise"),
     poste: z.string().min(1, "Le poste est requis"),
     statut: z.enum(statutEnum.enumValues),
+    lienOffre: z.string().optional(),
 })
 
 export async function createCandidature(formData: FormData) {
@@ -22,11 +23,13 @@ export async function createCandidature(formData: FormData) {
         entreprise: formData.get("entreprise"),
         poste: formData.get("poste"),
         statut: formData.get("statut"),
+        lienOffre: formData.get("lienOffre"),
     });
-    
+
     await db.insert(candidatures).values({
         userId,
         ...données,
+        lienOffre: données.lienOffre || null,
     });
 
     revalidatePath("/dashboard");
@@ -54,11 +57,12 @@ export async function updateCandidature(formData: FormData) {
         entreprise: formData.get("entreprise"),
         poste: formData.get("poste"),
         statut: formData.get("statut"),
+        lienOffre: formData.get("lienOffre"),
     });
 
     await db
         .update(candidatures)
-        .set(données)
+        .set({ ...données, lienOffre: données.lienOffre || null })
         .where(and(eq(candidatures.id, id), eq(candidatures.userId, userId)));
 
     revalidatePath("/dashboard");

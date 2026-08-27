@@ -37,6 +37,10 @@ export default async function EditCandidaturePage(
         <Input id="poste" name="poste" defaultValue={candidature.poste} required />
       </div>
       <div>
+        <Label htmlFor="lienOffre">Lien de l&apos;offre (optionnel)</Label>
+        <Input id="lienOffre" name="lienOffre" type="url" placeholder="https://..." defaultValue={candidature.lienOffre ?? ""} />
+      </div>
+      <div>
         <Label htmlFor="statut">Statut</Label>
         <select id="statut" name="statut" defaultValue={candidature.statut} className="w-full border rounded-md h-9 px-3">
           {STATUTS.map((s) => (
