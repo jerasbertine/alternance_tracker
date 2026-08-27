@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignOutButton } from "@clerk/nextjs";
 
 export function DashboardSidebar() {
   return (
@@ -14,9 +14,16 @@ export function DashboardSidebar() {
           </Link>
         </nav>
       </div>
-      <div className="flex items-center gap-3 pt-6 border-t border-sidebar-border">
-        <UserButton />
-        <span className="font-mono text-xs uppercase tracking-wider">Compte</span>
+      <div className="pt-6 border-t border-sidebar-border">
+        <div className="flex items-center gap-3 mb-4">
+          <UserButton />
+          <span className="font-mono text-xs uppercase tracking-wider">Compte</span>
+        </div>
+        <SignOutButton redirectUrl="/">
+          <button className="font-mono text-xs uppercase tracking-wider text-sidebar-foreground hover:text-sidebar-primary-foreground cursor-pointer">
+            Déconnexion
+          </button>
+        </SignOutButton>
       </div>
     </aside>
   );
