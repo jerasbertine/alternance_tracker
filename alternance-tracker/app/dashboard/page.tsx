@@ -60,7 +60,7 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
           <Link href={`/dashboard?tri=asc`}><Button variant="ghost" size="sm">Plus ancien</Button></Link>
         </div>
 
-        <form action={createCandidature} className="flex flex-wrap items-end gap-3 mb-10 border border-border rounded p-4">
+        <form action={createCandidature} className="flex flex-wrap items-end gap-4 mb-10 border border-border rounded p-5">
           <div>
             <Label htmlFor="entreprise">Entreprise</Label>
             <Input id="entreprise" name="entreprise"></Input>
@@ -70,12 +70,12 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
             <Input id="poste" name="poste"></Input>
           </div>
           <div>
-            <Label htmlFor="lienOffre">Lien de l&apos;offre (optionnel)</Label>
+            <Label htmlFor="lienOffre">Lien de l'offre (optionnel)</Label>
             <Input id="lienOffre" name="lienOffre" type="url" placeholder="https://..." />
           </div>
           <div>
             <Label htmlFor="statut">Statut</Label>
-            <select id="statut" name="statut" className="w-full border rounded-md h-9 px-3 border-border bg-background">
+            <select id="statut" name="statut" className="w-full border rounded-lg h-8 px-2.5 border-input bg-transparent text-base md:text-sm">
               {STATUTS.map((s) => (
                 <option key={s.value} value={s.value}>{s.label}</option>
               ))}
