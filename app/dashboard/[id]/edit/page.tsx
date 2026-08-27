@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { updateCandidature } from "@/app/dashboard/actions";
 import { STATUTS } from "@/lib/statuts";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import { Textarea } from "@/components/ui/textarea";
 
 export default async function EditCandidaturePage(
   props: PageProps<"/dashboard/[id]/edit">
@@ -69,6 +70,15 @@ export default async function EditCandidaturePage(
                   <option key={s.value} value={s.value}>{s.label}</option>
                 ))}
               </select>
+            </div>
+            <div>
+              <Label htmlFor="notes">Notes (optionnel)</Label>
+              <Textarea
+                id="notes"
+                name="notes"
+                defaultValue={candidature.notes ?? ""}
+                rows={4}
+              />
             </div>
             <Button type="submit">Enregistrer</Button>
           </form>
