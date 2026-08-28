@@ -108,14 +108,3 @@ npm run dev
 ```
 
 L'application est disponible sur [http://localhost:3000](http://localhost:3000).
-
-## Prochaines étapes
-
-Le périmètre de ce projet a volontairement exclu certaines fonctionnalités pour prioriser un cœur solide (auth, CRUD, déploiement). Pistes d'évolution envisagées :
-
-- **Page Offres** : coller manuellement une offre et laisser une IA (API Claude) en extraire les informations clés
-- **Génération de mail de relance** assistée par IA à partir du contexte d'une candidature
-- **Kanban avec drag & drop** entre les colonnes de statut
-- **Notifications** de relance (email ou in-app) après un délai sans réponse
-
-L'agrégation automatique d'offres multi-plateformes (scraping) a été écartée : fragile à maintenir et en zone grise vis-à-vis des CGU des plateformes concernées.
