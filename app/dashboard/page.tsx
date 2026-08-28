@@ -4,10 +4,11 @@ import { candidatures } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createCandidature, deleteCandidature } from "./actions";
-import { and, eq, asc, desc } from "drizzle-orm";
+import { createCandidature } from "./actions";
+import { eq, asc, desc } from "drizzle-orm";
 import { STATUTS } from "@/lib/statuts";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import { KanbanBoard } from "@/components/kanban-board";
 import Link from "next/link";
 
 export default async function DashboardPage(props: PageProps<"/dashboard">) {
@@ -91,38 +92,7 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {STATUTS.map((colonne) => {
-            const items = toutes.filter((c) => c.statut === colonne.value);
-            return (
-              <div key={colonne.value} className="bg-secondary border border-border rounded p-3 min-h-50">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
-                  {colonne.label} ({items.length})
-                </p>
-                <div className="flex flex-col gap-2">
-                  {items.length === 0 && (<p className="text-xs text-muted-foreground italic">Vide</p>)}
-                  {items.map((c) => (
-                    <div key={c.id} className="bg-background border border-border rounded p-3">
-                      <Link href={`/dashboard/${c.id}`}>
-                        <p className="font-serif italic font-medium text-sm hover:underline">{c.entreprise}</p>
-                      </Link>
-                      <p className="text-xs text-muted-foreground mb-2">{c.poste}</p>
-                      <div className="flex gap-2">
-                        <Link href={`/dashboard/${c.id}/edit`}>
-                          <Button variant="outline" size="sm">Modifier</Button>
-                        </Link>
-                        <form action={deleteCandidature}>
-                          <input type="hidden" name="id" value={c.id}/>
-                          <Button variant="destructive" size="sm" type="submit">Suppr.</Button>
-                        </form>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          <KanbanBoard candidatures={toutes} />
         )}
       </main>
     </div>

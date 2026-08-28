@@ -82,3 +82,18 @@ export async function updateCandidature(formData: FormData) {
     revalidatePath("/dashboard");
     redirect("/dashboard");
 }
+
+export async function updateStatutCandidature(
+    id: string,
+    statut: (typeof statutEnum.enumValues)[number]
+) {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Non connecté");
+
+    await db
+        .update(candidatures)
+        .set({ statut })
+        .where(and(eq(candidatures.id, id), eq(candidatures.userId, userId)));
+
+    revalidatePath("/dashboard");
+}
