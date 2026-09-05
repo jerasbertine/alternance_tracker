@@ -14,6 +14,7 @@ const candidatureSchema = z.object({
     statut: z.enum(statutEnum.enumValues),
     lienOffre: z.string().nullable().optional(),
     notes: z.string().nullable().optional(),
+    dateCandidature: z.string().nullable().optional(),
 })
 
 export async function createCandidature(formData: FormData) {
@@ -26,6 +27,7 @@ export async function createCandidature(formData: FormData) {
         statut: formData.get("statut"),
         lienOffre: formData.get("lienOffre"),
         notes: formData.get("notes"),
+        dateCandidature: formData.get("dateCandidature"),
     });
 
     if (!res.success) {
@@ -38,6 +40,7 @@ export async function createCandidature(formData: FormData) {
         ...données,
         lienOffre: données.lienOffre || null,
         notes: données.notes || null,
+        dateCandidature: données.dateCandidature ? new Date(données.dateCandidature) : null,
     });
 
     revalidatePath("/dashboard");
@@ -67,6 +70,7 @@ export async function updateCandidature(formData: FormData) {
         statut: formData.get("statut"),
         lienOffre: formData.get("lienOffre"),
         notes: formData.get("notes"),
+        dateCandidature: formData.get("dateCandidature"),
     });
 
     if (!res.success) {
@@ -76,7 +80,12 @@ export async function updateCandidature(formData: FormData) {
 
     await db
         .update(candidatures)
-        .set({ ...données, lienOffre: données.lienOffre || null, notes: données.notes || null })
+        .set({
+            ...données,
+            lienOffre: données.lienOffre || null,
+            notes: données.notes || null,
+            dateCandidature: données.dateCandidature ? new Date(données.dateCandidature) : null,
+        })
         .where(and(eq(candidatures.id, id), eq(candidatures.userId, userId)));
 
     revalidatePath("/dashboard");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DndContext, type DragEndEvent, useDraggable, useDroppable } from "@dnd-kit/core";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -81,6 +81,10 @@ function KanbanColumn({
 
 export function KanbanBoard({ candidatures }: { candidatures: Candidature[] }) {
   const [items, setItems] = useState(candidatures);
+
+  useEffect(() => {
+    setItems(candidatures);
+  }, [candidatures]);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
