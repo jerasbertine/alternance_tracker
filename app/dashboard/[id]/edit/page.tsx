@@ -59,6 +59,15 @@ export default async function EditCandidaturePage(
               <Input id="lienOffre" name="lienOffre" type="url" placeholder="https://..." defaultValue={candidature.lienOffre ?? ""} />
             </div>
             <div>
+              <Label htmlFor="dateCandidature">Date d&apos;envoi (optionnel)</Label>
+              <Input
+                id="dateCandidature"
+                name="dateCandidature"
+                type="date"
+                defaultValue={candidature.dateCandidature ? candidature.dateCandidature.toISOString().slice(0, 10) : ""}
+              />
+            </div>
+            <div>
               <Label htmlFor="statut">Statut</Label>
               <select
                 id="statut"

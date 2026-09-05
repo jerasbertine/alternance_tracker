@@ -75,6 +75,10 @@ export default async function DashboardPage(props: PageProps<"/dashboard">) {
             <Input id="lienOffre" name="lienOffre" type="url" placeholder="https://..." />
           </div>
           <div className="w-full sm:w-auto">
+            <Label htmlFor="dateCandidature">Date d&apos;envoi (optionnel)</Label>
+            <Input id="dateCandidature" name="dateCandidature" type="date" />
+          </div>
+          <div className="w-full sm:w-auto">
             <Label htmlFor="statut">Statut</Label>
             <select id="statut" name="statut" className="w-full border rounded-lg h-8 px-2.5 border-input bg-transparent text-base md:text-sm">
               {STATUTS.map((s) => (
