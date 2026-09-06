@@ -75,7 +75,7 @@ export default async function Home() {
           <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">02</p>
           <h3 className="font-serif italic text-xl font-medium mb-2">Relance</h3>
           <p className="text-muted-foreground text-sm">
-            Ne rate plus une relance: les cnaidatures sans réponse depuis un moment ressortent clairement.
+            Ne rate plus une relance: les candidatures sans réponse depuis un moment ressortent clairement.
           </p>
         </div>
         <div className="border border-border p-6">
