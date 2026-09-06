@@ -82,7 +82,7 @@ export default async function Home() {
           <p className="font-mono text-xs uppercase tracking-wider text-accent mb-3">03</p>
           <h3 className="font-serif italic text-xl font-medium mb-2">Simplicité</h3>
           <p className="text-muted-foreground text-sm">
-            Un seul endroit pour centralier toute tes candidatures d'alternance.
+            Un seul endroit pour centraliser toutes tes candidatures d'alternance.
           </p>
         </div>
       </section>
